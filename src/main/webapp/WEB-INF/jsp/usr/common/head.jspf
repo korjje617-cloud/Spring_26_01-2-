@@ -7,18 +7,34 @@
 <title>${pageTitle }</title>
 <link rel="stylesheet" href="/resource/common.css" />
 <script src="/resource/common.js" defer="defer"></script>
+<!-- 폰트어썸 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<!-- 폰트어썸 아이콘 : https://fontawesome.com/search?ic=free-collection-->
+
+<!-- 테일윈드 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.4/tailwind.min.css">
+<!-- 테일윈드 치트시트 : https://nerdcave.com/tailwind-cheat-sheet -->
+
+<!-- 제이쿼리-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 	<header>
-		<a href="/">LOGO</a>
-		<ul>
-			<li>
-				<a href="/">HOME</a>
-			</li>
-			<li>
-				<a href="../article/list">LIST</a>
-			</li>
-		</ul>
+		<div class="flex h-20 mx-auto items-center text-3xl">
+			<a href="/">LOGO</a>
+			<div class="flex-grow"></div>
+			<ul class="flex">
+				<li class="hover:underline">
+					<a href="/">HOME</a>
+				</li>
+				<li class="hover:underline">
+					<a href="../article/list">LIST</a>
+				</li>
+				<li class="hover:underline">
+					<a href="../member/login">LOGIN</a>
+				</li>
+			</ul>
+		</div>
 	</header>
 
 	<h1>${pageTitle }</h1>
