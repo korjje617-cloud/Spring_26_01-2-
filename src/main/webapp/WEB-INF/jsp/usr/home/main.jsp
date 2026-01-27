@@ -6,6 +6,7 @@
 <%@ include file="../common/head.jspf"%>
 
 <hr />
+
 <div>메인페이지</div>
 
 <%@ include file="../common/foot.jspf"%>

@@ -1,3 +1,4 @@
+
 package com.example.demo.controller;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.example.demo.DemoApplication;
 import com.example.demo.service.ArticleService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
@@ -18,8 +19,14 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UsrArticleController {
 
+	private final DemoApplication demoApplication;
+
 	@Autowired
 	private ArticleService articleService;
+
+	UsrArticleController(DemoApplication demoApplication) {
+		this.demoApplication = demoApplication;
+	}
 
 	// 액션메서드
 	@RequestMapping("/usr/article/detail")
@@ -79,7 +86,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData<Integer> doDelete(HttpSession session, int id) {
+	public String doDelete(HttpSession session, int id) {
 
 		boolean isLogined = false;
 		int loginedMemberId = 0;
@@ -90,26 +97,26 @@ public class UsrArticleController {
 		}
 
 		if (isLogined == false) {
-			return ResultData.from("F-A", "로그인 하고 삭제해");
+			return Ut.jsReplace("F-A", "로그인 하고 삭제해", "../member/login");
 		}
 
 		Article article = articleService.getArticleById(id);
 
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 게시글은 없어", id));
+			return Ut.jsHistoryBack("F-1", Ut.f("%d번 게시글은 없어", id));
 		}
-		
+
 		ResultData userCanDeleteRd = articleService.userCanDelete(loginedMemberId, article);
 
 		if (userCanDeleteRd.isFail()) {
-			return userCanDeleteRd;
+			return Ut.jsHistoryBack(userCanDeleteRd.getResultCode(), userCanDeleteRd.getMsg());
 		}
 
 		if (userCanDeleteRd.isSuccess()) {
 			articleService.deleteArticle(id);
 		}
 
-		return ResultData.from("S-1", Ut.f("%d번 게시글이 삭제됨", id), "이번에 삭제된 게시글의 id", id);
+		return Ut.jsReplace(userCanDeleteRd.getResultCode(), userCanDeleteRd.getMsg(), "../article/list");
 	}
 
 	@RequestMapping("/usr/article/list")
