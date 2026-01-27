@@ -1,4 +1,3 @@
-
 package com.example.demo.controller;
 
 import java.util.List;
@@ -8,13 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.example.demo.DemoApplication;
 import com.example.demo.service.ArticleService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.ResultData;
+import com.example.demo.vo.Rq;
 
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class UsrArticleController {
@@ -30,17 +31,11 @@ public class UsrArticleController {
 
 	// 액션메서드
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(HttpSession session, Model model, int id) {
+	public String showDetail(HttpServletRequest req, Model model, int id) {
 
-		boolean isLogined = false;
-		int loginedMemberId = 0;
+		Rq rq = new Rq(req);
 
-		if (session.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-
-		Article article = articleService.getForPrintArticle(loginedMemberId, id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
 
@@ -49,17 +44,11 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Article> doModify(HttpSession session, int id, String title, String body) {
+	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
 
-		boolean isLogined = false;
-		int loginedMemberId = 0;
+		Rq rq = new Rq(req);
 
-		if (session.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-
-		if (isLogined == false) {
+		if (rq.isLogined() == false) {
 			return ResultData.from("F-A", "로그인 하고 수정해");
 		}
 
@@ -69,7 +58,7 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Ut.f("%d번 게시글은 없어", id));
 		}
 
-		ResultData userCanModifyRd = articleService.userCanModify(loginedMemberId, article);
+		ResultData userCanModifyRd = articleService.userCanModify(rq.getLoginedMemberId(), article);
 
 		if (userCanModifyRd.isFail()) {
 			return userCanModifyRd;
@@ -86,17 +75,11 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(HttpSession session, int id) {
+	public String doDelete(HttpServletRequest req, int id) {
 
-		boolean isLogined = false;
-		int loginedMemberId = 0;
+		Rq rq = new Rq(req);
 
-		if (session.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-
-		if (isLogined == false) {
+		if (rq.isLogined() == false) {
 			return Ut.jsReplace("F-A", "로그인 하고 삭제해", "../member/login");
 		}
 
@@ -106,7 +89,7 @@ public class UsrArticleController {
 			return Ut.jsHistoryBack("F-1", Ut.f("%d번 게시글은 없어", id));
 		}
 
-		ResultData userCanDeleteRd = articleService.userCanDelete(loginedMemberId, article);
+		ResultData userCanDeleteRd = articleService.userCanDelete(rq.getLoginedMemberId(), article);
 
 		if (userCanDeleteRd.isFail()) {
 			return Ut.jsHistoryBack(userCanDeleteRd.getResultCode(), userCanDeleteRd.getMsg());
@@ -130,17 +113,11 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData<Article> doWrite(HttpSession session, String title, String body) {
+	public ResultData<Article> doWrite(HttpServletRequest req, String title, String body) {
 
-		boolean isLogined = false;
-		int loginedMemberId = 0;
+		Rq rq = new Rq(req);
 
-		if (session.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-
-		if (isLogined == false) {
+		if (rq.isLogined() == false) {
 			return ResultData.from("F-A", "로그인 하고 써");
 		}
 
@@ -151,7 +128,7 @@ public class UsrArticleController {
 			return ResultData.from("F-2", "내용써");
 		}
 
-		ResultData doWriteRd = articleService.writeArticle(loginedMemberId, title, body);
+		ResultData doWriteRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body);
 
 		int id = (int) doWriteRd.getData1();
 
