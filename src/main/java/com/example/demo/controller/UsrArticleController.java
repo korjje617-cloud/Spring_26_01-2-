@@ -26,6 +26,10 @@ public class UsrArticleController {
 	public String showDetail(Model model, int id) {
 
 		Article article = articleService.getArticleById(id);
+		
+		if (article == null) {
+			return "usr/article/null";
+		}
 
 		model.addAttribute("article", article);
 
