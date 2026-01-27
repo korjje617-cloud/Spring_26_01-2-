@@ -49,7 +49,7 @@
 		resultType="com.example.demo.vo.Article">
 		SELECT *
 		FROM article
-		WHERE A.id =
+		WHERE id =
 		#{id}
 	</select>
 

@@ -1,4 +1,3 @@
-
 package com.example.demo.service;
 
 import java.util.List;
@@ -44,10 +43,18 @@ public class ArticleService {
 	public ResultData userCanModify(int loginedMemberId, Article article) {
 
 		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-A2", Ut.f("%d번 게시글에 대한 권한 없음", article.getId()));
+			return ResultData.from("F-A2", Ut.f("%d번 게시글에 대한 수정 권한 없음", article.getId()));
 		}
 
-		return ResultData.from("S-1", Ut.f("%d번 게시글을 수정", article.getId()));
+		return ResultData.from("S-1", Ut.f("%d번 게시글을 수정 가능", article.getId()));
+	}
+
+	public ResultData userCanDelete(int loginedMemberId, Article article) {
+		if (article.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-A2", Ut.f("%d번 게시글에 대한 삭제 권한 없음", article.getId()));
+		}
+
+		return ResultData.from("S-1", Ut.f("%d번 게시글을 삭제 가능", article.getId()));
 	}
 
 	public void deleteArticle(int id) {
@@ -58,18 +65,21 @@ public class ArticleService {
 
 		Article article = articleRepository.getForPrintArticle(id);
 
-		updateForPrintData(loginedMemberId, article);
+		controlForPrintData(loginedMemberId, article);
 
 		return article;
 	}
 
-	private void updateForPrintData(int loginedMemberId, Article article) {
+	private void controlForPrintData(int loginedMemberId, Article article) {
 		if (article == null) {
 			return;
 		}
 
 		ResultData userCanModifyRd = userCanModify(loginedMemberId, article);
 		article.setUserCanModify(userCanModifyRd.isSuccess());
+
+		ResultData userCanDeleteRd = userCanDelete(loginedMemberId, article);
+		article.setUserCanDelete(userCanDeleteRd.isSuccess());
 	}
 
 	public void modifyArticle(int id, String title, String body) {
