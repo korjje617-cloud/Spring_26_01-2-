@@ -6,7 +6,7 @@ import lombok.Getter;
 
 // 로그인 관련 전담 
 public class Rq {
-
+	
 	@Getter
 	private boolean isLogined;
 	@Getter

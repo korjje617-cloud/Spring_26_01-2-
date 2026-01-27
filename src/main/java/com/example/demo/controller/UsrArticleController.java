@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.DemoApplication;
 import com.example.demo.service.ArticleService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
@@ -20,20 +19,14 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class UsrArticleController {
 
-	private final DemoApplication demoApplication;
-
 	@Autowired
 	private ArticleService articleService;
-
-	UsrArticleController(DemoApplication demoApplication) {
-		this.demoApplication = demoApplication;
-	}
 
 	// 액션메서드
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
@@ -46,7 +39,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
 
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (rq.isLogined() == false) {
 			return ResultData.from("F-A", "로그인 하고 수정해");
@@ -77,7 +70,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doDelete(HttpServletRequest req, int id) {
 
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (rq.isLogined() == false) {
 			return Ut.jsReplace("F-A", "로그인 하고 삭제해", "../member/login");
@@ -115,7 +108,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doWrite(HttpServletRequest req, String title, String body) {
 
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (rq.isLogined() == false) {
 			return ResultData.from("F-A", "로그인 하고 써");
