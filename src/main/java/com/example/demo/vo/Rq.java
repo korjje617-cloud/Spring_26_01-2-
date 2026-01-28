@@ -2,6 +2,10 @@ package com.example.demo.vo;
 
 import java.io.IOException;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import com.example.demo.util.Ut;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,6 +13,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 
+//Rq 객체를 매번 만들지 않고 스프링이 알아서 관리하게
+@Component
+// 프록시모드 = 가짜객체
+// 진짜 사용하려고 할 때 내용이 채워짐
+@Scope(value="request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 
 	@Getter
@@ -26,12 +35,12 @@ public class Rq {
 		this.resp = resp;
 		this.session = req.getSession();
 
-		HttpSession httpSession = req.getSession();
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
+		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		}
+		
+		this.req.setAttribute("rq", this);
 	}
 
 	public void printHistoryBack(String msg) throws IOException {
@@ -61,5 +70,9 @@ public class Rq {
 
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
+	}
+
+	public void initBeforeActionInterceptor() {
+		System.err.println("initBeforeActionInterceptor 실행됨");
 	}
 }
