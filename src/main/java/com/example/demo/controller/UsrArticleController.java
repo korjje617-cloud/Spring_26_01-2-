@@ -39,8 +39,25 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/modify")
-	public String modify() {
-		return "/usr/article/modify";
+	public String showModify(HttpServletRequest req, Model model, int id) {
+
+	    Rq rq = (Rq) req.getAttribute("rq");
+
+	    Article article = articleService.getArticleById(id);
+
+	    if (article == null) {
+	        return "redirect:/usr/article/list";
+	    }
+
+	    ResultData userCanModifyRd =
+	            articleService.userCanModify(rq.getLoginedMemberId(), article);
+
+	    if (userCanModifyRd.isFail()) {
+	        return "redirect:/usr/article/detail?id=" + id;
+	    }
+
+	    model.addAttribute("article", article);
+	    return "usr/article/modify";
 	}
 
 	@RequestMapping("/usr/article/doModify")

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="ARTICLE MODIFY"></c:set>
+<c:set var="pageTitle" value="ARTICLE WRITE"></c:set>
 
 <%@ include file="../common/head.jspf"%>
 
@@ -19,14 +19,14 @@
 						<th nowrap>제목</th>
 						<td>
 							<input size=50 maxlength=50 style="border: 1px solid black;" name="title" autocomplete="off" type="text"
-								value="${article.title}" />
+								value="제목" />
 						</td>
 					</tr>
 
 					<tr>
 						<th nowrap>본문</th>
 						<td>
-							<textarea rows="20" cols="50" style="border: 1px solid black;" name="body" autocomplete="off">${article.body}</textarea>
+							<textarea rows="20" cols="50" style="border: 1px solid black;" name="body" autocomplete="off" value="본문"></textarea>
 						</td>
 					</tr>
 
@@ -34,10 +34,9 @@
 						<td colspan="2">
 							<button type="button" onclick="history.back();">뒤로가기</button>
 						</td>
-						
-						<th></th>
+
 						<td style="text-align: right;" nowrap>
-							<button type="submit">수정</button>
+							<button type="submit">작성</button>
 						</td>
 					</tr>
 

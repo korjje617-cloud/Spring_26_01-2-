@@ -1,7 +1,11 @@
 http://localhost:8080/usr/home/main
 
 
-로그아웃 후처리
+write 폼
 
-modify 페이지는 만들었는데
-제출이 안됨
+
+
+board 개념 = 카테고리
+공지사항, 자유, qna
+이 개념이 추가되면 생성되는 시나리오를
+글로 정리
