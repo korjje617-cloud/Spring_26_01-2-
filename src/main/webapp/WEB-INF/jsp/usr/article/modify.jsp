@@ -8,17 +8,16 @@
 <hr />
 
 <section class="mt-8 text-xl px-4">
-	<div class="mx-auto" >
-		<form action="../member/doModify" method="POST" >
-			<table border="1" cellspacing="0" cellpadding="5" style="width: 50%; border-collapse: collapse;" >
+	<div class="mx-auto">
+		<form action="../article/doModify" method="POST">
+			<table border="1" cellspacing="0" cellpadding="5" style="width: 50%; border-collapse: collapse;">
 				<tbody>
-
 
 					<tr>
 						<th>제목</th>
 						<td>
 							<input size=50 maxlength=50 style="border: 1px solid black;" name="title" autocomplete="off" type="text"
-								value="${article.title }" />
+								value="${article.title}" />
 						</td>
 					</tr>
 
@@ -27,15 +26,14 @@
 					<tr>
 						<th>본문</th>
 						<td>
-							<textarea rows="20" cols="50" style="border: 1px solid black;" name="body" autocomplete="off" type="text">
-							${article.body } 
-							</textarea>
+							<textarea rows="20" cols="50" style="border: 1px solid black;" name="body" autocomplete="off">${article.body}</textarea>
+						</td>
 					</tr>
 
 					<tr>
 						<th></th>
-						<td style="text-align: right;"> <!-- 제출 수정해야함 -->
-							<input type="submit" value="수정"  />
+						<td style="text-align: right;">
+							<input type="submit" value="수정" />
 						</td>
 					</tr>
 
