@@ -8,9 +8,10 @@
 <hr />
 
 <section class="mt-8 text-xl px-4">
-	<div class="mx-auto flex justify-center">
+	<div class="mx-auto">
 		<form action="../article/doModify" method="POST">
-			<table border="1" cellspacing="0" cellpadding="5" style="width: 50%; border-collapse: collapse;">
+			<input type="hidden" name="id" value="${article.id }" />
+			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 				<tbody>
 				
 					<input type="hidden" name="id" value="${article.id}">
@@ -29,21 +30,21 @@
 							<textarea rows="20" cols="50" style="border: 1px solid black;" name="body" autocomplete="off">${article.body}</textarea>
 						</td>
 					</tr>
-
 					<tr>
-						<td colspan="2">
-							<button type="button" onclick="history.back();">뒤로가기</button>
-						</td>
-						
 						<th></th>
-						<td style="text-align: right;" nowrap>
-							<button type="submit">수정</button>
+						<td style="text-align: center;">
+							<input class="btn btn-outline btn-ghost" type="submit" value="수정" />
 						</td>
 					</tr>
-
 				</tbody>
 			</table>
 		</form>
+		<div class="btns">
+			<button class="btn btn-outline btn-ghost" type="button" onClick="history.back();">뒤로가기</button>
+			<c:if test="${article.userCanDelete }">
+				<a class="btn btn-outline btn-error" href="../article/doDelete?id=${article.id }">삭제</a>
+			</c:if>
+		</div>
 	</div>
 </section>
 
