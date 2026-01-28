@@ -12,7 +12,7 @@
 		<form action="../article/doModify" method="POST">
 			<table border="1" cellspacing="0" cellpadding="5" style="width: 50%; border-collapse: collapse;">
 				<tbody>
-				
+
 					<input type="hidden" name="id" value="${article.id}">
 
 					<tr>

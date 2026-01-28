@@ -17,11 +17,11 @@
 				</tr>
 				<tr>
 					<th style="text-align: center;">Registration Date</th>
-					<td style="text-align: center;">${article.regDate.substring(0,10) }</td>
+					<td style="text-align: center;">${article.regDate }</td>
 				</tr>
 				<tr>
 					<th style="text-align: center;">Update Date</th>
-					<td style="text-align: center;">${article.updateDate.substring(0,10) }</td>
+					<td style="text-align: center;">${article.updateDate }</td>
 				</tr>
 				<tr>
 					<th style="text-align: center;">Writer</th>
@@ -37,18 +37,16 @@
 				</tr>
 			</tbody>
 		</table>
-
 		<div class="btns">
 			<button type="button" onClick="history.back();">뒤로가기</button>
 			<c:if test="${article.userCanModify }">
 				<a href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
-
 			<c:if test="${article.userCanDelete }">
 				<a href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
-		</div>
 
+		</div>
 	</div>
 </section>
 

@@ -31,7 +31,12 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		
+		<div class="btns">
+			<button type="button" onClick="history.back();">뒤로가기</button>
+
+			<a href="../article/write }">글쓰기</a>
+
+		</div>
 	</div>
 </section>
 
