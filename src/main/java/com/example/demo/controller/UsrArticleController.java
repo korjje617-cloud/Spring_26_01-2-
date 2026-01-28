@@ -34,6 +34,11 @@ public class UsrArticleController {
 
 		return "usr/article/detail";
 	}
+	
+	@RequestMapping("/usr/article/modify")
+	public String modify() {
+		return "/usr/article/modify";
+	}
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody

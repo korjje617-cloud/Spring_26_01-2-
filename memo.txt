@@ -1,4 +1,7 @@
-수정페이지로 처리
-form 태그
+http://localhost:8080/usr/home/main
 
-로그인 중복 제거
+
+로그아웃 후처리
+
+modify 페이지는 만들었는데
+제출이 안됨

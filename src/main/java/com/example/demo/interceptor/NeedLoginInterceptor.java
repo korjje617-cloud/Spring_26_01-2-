@@ -1,4 +1,4 @@
-package com.example.demo.intercepter;
+package com.example.demo.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,7 +19,6 @@ public class NeedLoginInterceptor implements HandlerInterceptor {
 
 		if (!rq.isLogined()) {
 			System.err.println("로그인 하고 사용해야함");
-//			resp.getWriter().append("<script>~~~~")
 
 			rq.printHistoryBack("로그인 하고 사용해야함");
 
