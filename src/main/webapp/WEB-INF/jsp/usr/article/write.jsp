@@ -8,7 +8,7 @@
 <hr />
 
 <section class="mt-24  text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto flex justify-center">
 		<form action="../article/doWrite" method="POST">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 				<tbody>
@@ -25,30 +25,36 @@
 						</td>
 					</tr>
 					<tr>
-						<th style="text-align: center;">Title</th>
-						<td style="text-align: center;">
-							<input class="input input-neutral input-sm" name="title" type="text" autocomplete="off" placeholder="제목" />
+						<th nowrap>제목</th>
+						<td>
+							<input size=50 maxlength=50 style="border: 1px solid black;" name="title" autocomplete="off" type="text"
+								placeholder="제목" />
 						</td>
 					</tr>
+
 					<tr>
-						<th style="text-align: center;">Body</th>
-						<td style="text-align: center;">
-							<input class="input input-neutral input-sm" name="body" type="text" autocomplete="off" placeholder="내용" />
+						<th nowrap>본문</th>
+						<td>
+							<textarea rows="20" cols="50" style="border: 1px solid black;" name="body" autocomplete="off" placeholder="내용"></textarea>
 						</td>
 					</tr>
+
 					<tr>
-						<th></th>
-						<td style="text-align: center;">
+
+						<td>
+							<div class="btns">
+								<button class="btn btn-outline btn-ghost whitespace-nowrap" type="button" type="button"
+									onClick="history.back();">뒤로가기</button>
+							</div>
+						</td>
+
+						<td style="text-align: right;">
 							<input class="btn btn-outline btn-ghost" type="submit" value="작성" />
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
-		<div class="btns">
-			<button class="btn btn-outline btn-ghost" type="button" type="button" onClick="history.back();">뒤로가기</button>
-
-		</div>
 	</div>
 </section>
 

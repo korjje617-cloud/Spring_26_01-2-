@@ -8,47 +8,50 @@
 <hr />
 
 <section class="mt-24  text-xl px-4">
-	<div class="mx-auto">
+	<div class="mx-auto flex justify-center">
 		<form action="../article/doWrite" method="POST">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 				<tbody>
+					<input type="hidden" name="id" value="${article.id}">
 
 					<tr>
-						<th style="text-align: center;">게시판</th>
-						<td style="text-align: center;">
-							<select name="boardId">
-								<option value="" selected disabled>게시판을 선택해주세요</option>
-								<option value="1">공지</option>
-								<option value="2">자유</option>
-								<option value="3">QnA</option>
-							</select>
+						<th nowrap>제목</th>
+						<td>
+							<input size=50 maxlength=50 style="border: 1px solid black;" name="title" autocomplete="off" type="text"
+								value="${article.title}" />
 						</td>
 					</tr>
+
 					<tr>
-						<th style="text-align: center;">Title</th>
-						<td style="text-align: center;">
-							<input class="input input-neutral input-sm" name="title" type="text" autocomplete="off" placeholder="제목" />
+						<th nowrap>본문</th>
+						<td>
+							<textarea rows="20" cols="50" style="border: 1px solid black;" name="body" autocomplete="off">${article.body}</textarea>
 						</td>
 					</tr>
+
+
 					<tr>
-						<th style="text-align: center;">Body</th>
-						<td style="text-align: center;">
-							<input class="input input-neutral input-sm" name="body" type="text" autocomplete="off" placeholder="내용" />
+
+						<td style="text-align: left;">
+							<c:if test="${article.userCanDelete }">
+								<a class="btn btn-outline btn-error whitespace-nowrap" href="../article/doDelete?id=${article.id }">삭제</a>
+							</c:if>
 						</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td style="text-align: center;">
-							<input class="btn btn-outline btn-ghost" type="submit" value="작성" />
+
+						<td nowrap>
+							<div class="btns">
+								<button class="btn btn-outline btn-ghost" type="button" onClick="history.back();">뒤로가기</button>
+							</div>
 						</td>
+
+						<td style="text-align: right;">
+							<input class="btn btn-outline btn-ghost" type="submit" value="수정" />
+						</td>
+
 					</tr>
 				</tbody>
 			</table>
 		</form>
-		<div class="btns">
-			<button class="btn btn-outline btn-ghost" type="button" type="button" onClick="history.back();">뒤로가기</button>
-
-		</div>
 	</div>
 </section>
 

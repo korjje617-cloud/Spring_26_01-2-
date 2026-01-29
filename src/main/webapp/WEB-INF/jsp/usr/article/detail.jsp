@@ -9,47 +9,42 @@
 
 <section class="mt-24 text-xl px-4">
 	<div class="mx-auto">
-		<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
-			<tbody>
-				<tr>
-					<th style="text-align: center;">ID</th>
-					<td style="text-align: center;">${article.id }</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">Registration Date</th>
-					<td style="text-align: center;">${article.regDate }</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">Update Date</th>
-					<td style="text-align: center;">${article.updateDate }</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">Writer</th>
-					<td style="text-align: center;">${article.extra__writer }</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">BoardId</th>
-					<td style="text-align: center;">${article.boardId }</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">Title</th>
-					<td style="text-align: center;">${article.title }</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">Body</th>
-					<td style="text-align: center;">${article.body }</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="btns">
-			<button class="btn btn-outline btn-ghost" type="button" type="button" onClick="history.back();">뒤로가기</button>
-			<c:if test="${article.userCanModify }">
-				<a class="btn btn-outline btn-warning" type="button" href="../article/modify?id=${article.id }">수정</a>
-			</c:if>
-			<c:if test="${article.userCanDelete }">
-				<a class="btn btn-outline btn-error" type="button" href="../article/doDelete?id=${article.id }">삭제</a>
-			</c:if>
+		<div class="article-detail" style="width: 800px; margin: 0 auto;">
 
+			<!-- 제목 -->
+			<h2 style="margin-bottom: 10px;">${article.title}</h2>
+
+			<!-- 메타 정보 -->
+			<div style="color: #666; font-size: 14px; margin-bottom: 20px;">
+				<span>작성자: ${article.extra__writer}</span>
+				&nbsp;|&nbsp;
+				<span>작성일: ${article.regDate}</span>
+				<c:if test="${article.updateDate ne article.regDate}">
+            &nbsp;|&nbsp;
+            <span>수정일: ${article.updateDate}</span>
+				</c:if>
+			</div>
+
+			<hr>
+
+			<!-- 본문 -->
+			<div style="min-height: 200px; padding: 20px 0; font-size: 16px; line-height: 1.6; white-space: pre-line;">${article.body}</div>
+
+			<hr>
+
+			<!-- 하단 정보 -->
+			<div style="text-align: right; font-size: 12px; color: #999;">게시글 번호: ${article.id}</div>
+
+			<div class="btns">
+				<button class="btn btn-outline btn-ghost" type="button" type="button" onClick="history.back();">뒤로가기</button>
+				<c:if test="${article.userCanModify }">
+					<a class="btn btn-outline btn-warning" type="button" href="../article/modify?id=${article.id }">수정</a>
+				</c:if>
+				<c:if test="${article.userCanDelete }">
+					<a class="btn btn-outline btn-error" type="button" href="../article/doDelete?id=${article.id }">삭제</a>
+				</c:if>
+
+			</div>
 		</div>
 	</div>
 </section>
