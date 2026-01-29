@@ -18,7 +18,8 @@ public interface ArticleRepository {
 
 	public Article getArticleById(int id);
 
-	public List<Article> getArticles();
+	public List<Article> getArticles(int boardId);
+	// MyBatis와 Java 메서드를 연결
 
 	public int getLastInsertId();
 	

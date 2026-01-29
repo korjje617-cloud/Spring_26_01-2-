@@ -53,14 +53,26 @@
 		#{id}
 	</select>
 
+<!-- 게시글 리스트를 보여줄 수 있게 DB에 접속하는 쿼리인데
+여기서 board 를 join 해줘서 jsp 에서도 board.name 사용 가능 -->
 	<select id="getArticles"
 		resultType="com.example.demo.vo.Article">
-		SELECT A.*, M.nickname AS extra__writer
-		FROM article AS A
-		INNER JOIN `member` AS M
+		SELECT
+		A.*, <!-- 게시글 정보-->
+		M.nickname AS extra__writer, <!-- 작성자 닉네임-->
+		B.name AS board__name <!-- 카테고리 이름-->
+		FROM article AS A 
+
+		LEFT JOIN member AS M
 		ON A.memberId = M.id
-		ORDER BY A.id
-		DESC
+
+		INNER JOIN board AS B
+		ON A.boardId = B.id
+		
+		<!-- URL로 받은 boardId와 같은 게시글만 조회 -->
+		WHERE A.boardId = #{boardId}
+
+		ORDER BY A.id DESC
 	</select>
 
 </mapper>

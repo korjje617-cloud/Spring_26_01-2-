@@ -26,7 +26,7 @@ public class UsrArticleController {
 
 	@Autowired
 	private ArticleService articleService;
-	
+
 	@Autowired
 	private BoardService boardService;
 
@@ -111,16 +111,24 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, int boardId) {
-
+	    // 1. URL 파라미터로 넘어온 boardId 받음
+	    //    예: /usr/article/list?boardId=3
+	    //    → boardId = 3
+		
 		Board board = boardService.getBoardById(boardId);
+	    // 2. boardId로 현재 게시판(카테고리) 정보 조회
+	    //    (게시판 이름, 코드 등 화면에 뿌릴 용도)
 
-		List<Article> articles = articleService.getArticles();
-	
+		List<Article> articles = articleService.getArticles(boardId);
+	    // 3. boardId를 그대로 서비스에 전달
+	    //    → "이 게시판에 속한 글만 가져와라"는 의미
 
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
+		// 4. JSP에서 사용할 데이터 model에 담기
 
 		return "/usr/article/list";
+		// 5. list.jsp로 이동
 	}
 
 	@RequestMapping("/usr/article/write")

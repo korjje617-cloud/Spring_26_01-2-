@@ -12,16 +12,7 @@
 		<form action="../article/doWrite" method="POST">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 60%; border-collapse: collapse;">
 				<tbody>
-					<tr>
-						<th nowrap>카테고리</th>
-						<td>
-							<select name="category" id="">
-								<option value="">카테고리 선택</option>
-								<option value="">자유</option>
-								<option value="">qna</option>
-							</select>
-						</td>
-					</tr>
+
 					<tr>
 						<th nowrap>제목</th>
 						<td>

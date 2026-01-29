@@ -91,8 +91,9 @@ public class ArticleService {
 		return articleRepository.getArticleById(id);
 	}
 
-	public List<Article> getArticles() {
-		return articleRepository.getArticles();
+	public List<Article> getArticles(int boardId) {
+		return articleRepository.getArticles(boardId);
+		// 컨트롤러에서 받은 boardId를 그대로 리포지토리에 넘김
 	}
 
 }
