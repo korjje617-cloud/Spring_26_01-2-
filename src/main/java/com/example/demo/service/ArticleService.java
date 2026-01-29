@@ -1,3 +1,4 @@
+
 package com.example.demo.service;
 
 import java.util.List;
@@ -18,22 +19,11 @@ public class ArticleService {
 
 	public ArticleService(ArticleRepository articleRepository) {
 		this.articleRepository = articleRepository;
-//		makeTestData();
 	}
 
-	// 서비스메서드
-//	private void makeTestData() {
-//		for (int i = 1; i <= 10; i++) {
-//			String title = "제목 " + i;
-//			String body = "내용 " + i;
-//
-//			articleRepository.writeArticle(title, body);
-//		}
-//	}
+	public ResultData writeArticle(int loginedMemberId, String title, String body, String boardId) {
 
-	public ResultData writeArticle(int loginedMemberId, String title, String body) {
-
-		articleRepository.writeArticle(loginedMemberId, title, body);
+		articleRepository.writeArticle(loginedMemberId, title, body, boardId);
 
 		int id = articleRepository.getLastInsertId();
 
@@ -91,9 +81,12 @@ public class ArticleService {
 		return articleRepository.getArticleById(id);
 	}
 
-	public List<Article> getArticles(int boardId) {
-		return articleRepository.getArticles(boardId);
-		// 컨트롤러에서 받은 boardId를 그대로 리포지토리에 넘김
+	public List<Article> getArticles() {
+		return articleRepository.getArticles();
+	}
+
+	public List<Article> getForPrintArticles(int boardId) {
+		return articleRepository.getForPrintArticles(boardId);
 	}
 
 }
