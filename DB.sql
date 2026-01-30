@@ -7,6 +7,8 @@ CREATE TABLE article (
 	 id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	 regDate DATETIME NOT NULL,
 	 updateDate DATETIME NOT NULL,
+	 memberId INT(10) UNSIGNED NOT NULL,
+	 boardId INT(10) NOT NULL,
 	 title CHAR(100) NOT NULL,
 	 `body` TEXT NOT NULL
 );
@@ -39,7 +41,7 @@ CREATE TABLE board (
 	 delDate DATETIME COMMENT '삭제 날짜'
 );
 
-# 게시판 테스트 데이터 생성
+# 게시판 TD
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -58,36 +60,31 @@ updateDate = NOW(),
 `code` = 'QnA',
 `name` = '질의응답';
 
+
 # 게시글 TD
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = '제목1',
-`body` = '내용1';
+memberId = 1,
+boardId = 1,
+title = '공지사항',
+`body` = '공지사항';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = '제목2',
-`body` = '내용2';
+memberId = 2,
+boardId = 2,
+title = '자유',
+`body` = '자유';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = '제목3',
-`body` = '내용3';
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = '제목4',
-`body` = '내용4';
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = '제목5',
-`body` = '내용5';
+memberId = 3,
+boardId = 3,
+title = '질의응답',
+`body` = '질의응답';
 
 
 # 회원 TD
@@ -122,34 +119,6 @@ nickname = '회원2_별명',
 cellphoneNum = '01056785678',
 email = 'abced@gmail.com';
 
-# article 테이블에 회원번호 추가
-ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER regDate;
-
-
-UPDATE article 
-SET memberId = 2
-WHERE id IN (1,2);
-
-UPDATE article 
-SET memberId = 3
-WHERE id IN (3,4,5);
-
-# article 테이블에 게시판 번호 추가
-ALTER TABLE article ADD COLUMN boardId INT(10) NOT NULL AFTER `memberId`;
-
-UPDATE article 
-SET boardId = 1
-WHERE id IN (1,2);
-
-UPDATE article 
-SET boardId = 2
-WHERE id IN (3,4);
-
-UPDATE article 
-SET boardId = 3
-WHERE id = 5;
-
-DESC article;
 
 # -------------------SELECT 확인용
 
@@ -165,84 +134,28 @@ FROM board;
 
 ##===============================###################### 테스트
 
-SELECT *
-FROM board
-WHERE id = 3;
 
-SELECT LAST_INSERT_ID();
-
-INSERT INTO article SET regDate = NOW(), title = '제목1', `body` = '내용1'; , DATA=[, ]
-
-SELECT *
-FROM `member`
-WHERE loginId = 'test3';
-
-SELECT *
-FROM article
-ORDER BY id DESC;
-
-SELECT *
-FROM `member`;
-
-SELECT A.*, M.name AS extra__writer
-FROM article AS A
-         INNER JOIN `member` AS M
-                    ON A.memberId = M.id;
-
-SELECT CEILING(RAND() * 2);
-
-# article 대량생성
+# article 대량생성 1
 INSERT INTO article
 SET regDate = NOW(),
 memberId = CEILING(RAND() * 2),
+boardId = CEILING(RAND() * 3),
 title = CONCAT('제목', RAND()),
 `body` = CONCAT('내용', RAND());
 
-# member 대량생성
+# article 대량생성 2
+INSERT INTO article
+	(
+		regDate, updateDate, memberId, boardId, title, `body`
+	)
+SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 2, FLOOR(RAND() * 3) + 1, CONCAT('제목__',RAND()), CONCAT('내용__',RAND())
+FROM article;
+
+
+# member 대량생성 (아직 필요 없음)
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = CONCAT('loginId', SUBSTRING(RAND() * 1000 FROM 1 FOR 2)),
 loginPw = CONCAT('loginPw', SUBSTRING(RAND() * 1000 FROM 1 FOR 2)),
 `name` = CONCAT('name', SUBSTRING(RAND() * 1000 FROM 1 FOR 2));
-
-SELECT * FROM `member` WHERE loginId = 'test1';
-
-SELECT 1 + 1;
-SELECT 1 >= 1;
-
-SELECT COUNT(*) > 0
-FROM `member`
-WHERE loginId = 'test1';
-
-SELECT COUNT(*) > 0
-FROM `member`
-WHERE loginId = 'test3';
-
-SELECT NOW();
-
-SELECT '제목1';
-
-SELECT CONCAT('제목','2');
-
-SELECT SUBSTRING(RAND() * 1000 FROM 1 FOR 2);
-
-UPDATE article
-SET updateDate = NOW(),
-    title = '',
-    `body` = 'test1'
-WHERE id = 1;
-
-SELECT COUNT(*)
-FROM article
-WHERE id = 5;
-
-
-UPDATE article
-SET updateDate = NOW(),
-    `body` = 'test3'
-WHERE id = 3;
-
-
-SELECT *
-FROM article;

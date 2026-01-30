@@ -12,10 +12,10 @@
 		<form action="../article/doWrite" method="POST">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">
 				<tbody>
-
-					<tr>
-						<th style="text-align: center;">게시판</th>
-						<td style="text-align: center;">
+					
+					<tr> <!-- 게시판 부분 중앙정렬 제거 -->
+						<th>게시판</th>
+						<td>
 							<select name="boardId">
 								<option value="" selected disabled>게시판을 선택해주세요</option>
 								<option value="1">공지</option>

@@ -117,19 +117,43 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId) {
-
+	// 파라미터로 게시판 아이디, 페이지 위치를 받아야 함
+	// 여기서 쓰는 매개변수와 들어오는 인자는 모두 url 의 파라미터다
+	// 모델 파라미터는 결과를 키밸류 형태로 저장해서 jsp 에 들고가는 역할
+	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "1") int page) {
+		
+		// 게시판이 어떤 게시판인지 찾고
 		Board board = boardService.getBoardById(boardId);
-
+		
+		// 없는 게시판 표시
 		if (board == null) {
-//			return rq.historyBackOnView("존재하지 않는 게시판입니다"); -> 흐름 따라가되 잘 안쓰는 방식
+			return rq.historyBackOnView("존재하지 않는 게시판입니다");
 		}
+		
+		// 그 게시판에 있는 게시글이 몇개인지 알기 위해
+		// boardId 를 보내고
+		int articlesCount = articleService.getArticlesCount(boardId);
+		
+		// 한페이지에 10개
+		int itemsInAPage = 10;
+		
+		// 총 페이지 갯수는 게시글 갯수 / 10 < 을 올림
+		int totalPages = (int) Math.ceil((double) articlesCount / itemsInAPage);
 
-		List<Article> articles = articleService.getForPrintArticles(boardId);
-
+		// 실질적인 게시글 목록
+		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page);
+		
+		// 모델 객체에 넣어야 뭐든지 jsp 에서 사용이 가능
+		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
-
+		
+		//총 페이지 갯수랑 현재 페이지 정보도 모델에 담아서 넘겨줌
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("page", page);
+		
+		// jsp 로 간다
 		return "/usr/article/list";
 	}
 
