@@ -52,16 +52,20 @@
 <!-- 여기가 페이지네이션 구간 -->
 <!-- 뷰포트 가운데에 정렬했고 -->
 <div class="flex justify-center m-4">
+	
+	<!-- 페이지로 이동하는 버튼들을 그룹으로 묶는다 데이지ui 기능임 -->
+	<div class="btn-group join">
 
-	<!-- JSTL 의 forEach 반복문 제어 문법을 보면 var 변수의 값 i가 증가할거고 -->
-	<!-- 시작은 1 끝은 토탈페이지 숫자만큼 -->
-	<c:forEach var="i" begin="1" end="${totalPages}">
-		<!-- a 링크가 바로 나오면 너무 숫자끼리 붙어있어서 div로 감싸주고 마진 넣어줬음 -->
-		<div class="m-2 " border="1" cellspacing="0" cellpadding="5">
+		<!-- JSTL 의 forEach 반복문 제어 문법을 보면 var 변수의 값 i가 증가할거고 -->
+		<!-- for (int i = 1; i <= totalPages; i++) -->
+		<c:forEach var="i" begin="1" end="${totalPages}">
+
 			<!-- a링크로 값이 대입되어 이동할 수 있다 -->
-			<a href="list?boardId=${board.id}&page=${i}"> ${i} </a>
-		</div>
-	</c:forEach>
+			<a href="list?boardId=${board.id}&page=${i}" class="join-item btn btn-sm ${param.page == i ? 'btn-active' : ''}"> ${i} </a>
+
+		</c:forEach>
+
+	</div>
 </div>
 
 <%@ include file="../common/foot.jspf"%>
