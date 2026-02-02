@@ -47,12 +47,16 @@
 	<!-- 	동적 페이징 -->
 	<div class="flex justify-center mt-4">
 		<div class="btn-group join">
-			<c:set var="paginationLen" value="5" />
+			<c:set var="paginationLen" value="3" />
 			<c:set var="startPage" value="${page - paginationLen >= 1 ? page - paginationLen : 1}" />
 			<c:set var="endPage" value="${page + paginationLen <= pagesCount ?  page + paginationLen : pagesCount}" />
 
+			<c:set var="baseUri" value="?boardId=${boardId }" />
+			<c:set var="baseUri" value="${baseUri }&searchKeywordTypeCode=${searchKeywordTypeCode }" />
+			<c:set var="baseUri" value="${baseUri }&searchKeyword=${searchKeyword }" />
+
 			<c:if test="${startPage > 1}">
-				<a class="join-item btn btn-sm" href="?page=1&boardId=${boardId}">1</a>
+				<a class="join-item btn btn-sm" href="${baseUri }&page=1">1</a>
 			</c:if>
 
 			<c:if test="${startPage > 2}">
@@ -60,7 +64,7 @@
 			</c:if>
 
 			<c:forEach begin="${startPage }" end="${endPage }" var="i">
-				<a class="join-item btn btn-sm ${param.page == i ? 'btn-active' : ''}" href="?page=${i }&boardId=${param.boardId}">${i }</a>
+				<a class="join-item btn btn-sm ${param.page == i ? 'btn-active' : ''}" href="${baseUri }&page=${i }">${i }</a>
 			</c:forEach>
 
 			<c:if test="${endPage < pagesCount - 1}">
@@ -69,10 +73,21 @@
 
 			<c:if test="${endPage < pagesCount}">
 
-				<a class="join-item btn btn-sm" href="?page=${pagesCount }&boardId=${boardId}">${pagesCount }</a>
+				<a class="join-item btn btn-sm" href="${baseUri }&page=${pagesCount }">${pagesCount }</a>
 			</c:if>
 
 		</div>
 	</div>
+
+	<!-- 	직관적인 페이징 -->
+	<!-- 	<div class="flex justify-center mt-4"> -->
+	<!-- 		<div class="btn-group join"> -->
+
+	<%-- 			<c:forEach begin="1" end="${pagesCount }" var="i"> --%>
+	<%-- 				<a class="join-item btn btn-sm ${param.page == i ? 'btn-active' : ''}" href="?page=${i }&boardId=${param.boardId}">${i }</a> --%>
+	<%-- 			</c:forEach> --%>
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+</section>
 
 <%@ include file="../common/foot.jspf"%>

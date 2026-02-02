@@ -134,7 +134,7 @@ FROM board;
 
 ##===============================###################### 테스트
 
-# 자유게시판 대량생성
+# 자유게시판 생성
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -144,7 +144,7 @@ title = CONCAT('제목', SUBSTRING(RAND() * 1000 FROM 1 FOR 2)),
 `body` = CONCAT('내용', SUBSTRING(RAND() * 1000 FROM 1 FOR 2));
 
 
-# article 대량생성 1
+# article 생성 1
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -159,7 +159,7 @@ INSERT INTO article
 	(
 		regDate, updateDate, memberId, boardId, title, `body`
 	)
-SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 3) + 1, CONCAT('제목__',RAND()), CONCAT('내용__',RAND())
+SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 3) + 1, CONCAT('제목', SUBSTRING(RAND() * 1000 FROM 1 FOR 2)), CONCAT('내용', SUBSTRING(RAND() * 1000 FROM 1 FOR 2))
 FROM article;
 
 
