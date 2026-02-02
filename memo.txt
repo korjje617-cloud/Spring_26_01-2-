@@ -1,17 +1,5 @@
 http://localhost:8080/usr/home/main
 
-검색기능 구현
-제목, 내용, 작성자
-
-쿼리는
-SELECT *
-FRIM article
-WHERE CONTAINS(title, '"String"')
-이런식으로 쓰고 다듬으면 될 것 같고
-
-검색어 입력은 form 태그에 submit
-검색 컨트롤러-서비스-리포지터리가 더 필요한가?
-
-검색을 하면 검색 결과 페이지에 넘어가도록
-그럼 jsp 파일도 더 필요
-
+조회수
+int view 변수?
+onclick 이벤트 한번에 +1?
