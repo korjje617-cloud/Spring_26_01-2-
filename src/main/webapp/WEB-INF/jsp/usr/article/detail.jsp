@@ -7,6 +7,32 @@
 
 <hr />
 
+<!-- <iframe src="http://localhost:8080/usr/article/doIncreaseHitCount?id=2" frameborder="0"></iframe> -->
+
+<script>
+	const params = {};
+	params.id = parseInt('${param.id}');
+</script>
+
+<script>
+	function ArticleDetail__doIncreaseHitCount() {
+		$.get('../article/doIncreaseHitCountRd', {
+			id : params.id,
+			ajaxMode : 'Y'
+		}, function(data) {
+			$('.article-dtail__hit-count').html(data.data1);
+			console.log(data);
+			console.log('data.msg : ' + data.msg);
+			console.log('data.data1 : ' + data.data1);
+		}, 'json')
+	}
+
+	$(function() {
+		ArticleDetail__doIncreaseHitCount();
+		// 		setTimeout(ArticleDetail__doIncreaseHitCount, 2000);
+	})
+</script>
+
 <section class="mt-24 text-xl px-4">
 	<div class="mx-auto">
 		<div class="article-detail" style="width: 800px; margin: 0 auto;">
@@ -40,7 +66,7 @@
 
 			<!-- 하단 정보 -->
 
-			<div class="btns mt-10">
+			<div class="btns mt-20">
 				<button class="btn btn-outline btn-ghost" type="button" type="button" onClick="history.back();">뒤로가기</button>
 				<c:if test="${article.userCanModify }">
 					<a class="btn btn-outline btn-warning" type="button" href="../article/modify?id=${article.id }">수정</a>
