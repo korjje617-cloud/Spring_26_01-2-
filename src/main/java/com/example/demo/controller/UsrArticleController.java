@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.example.demo.DemoApplication;
 import com.example.demo.interceptor.BeforeActionInterceptor;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
@@ -22,6 +23,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class UsrArticleController {
 
+	private final DemoApplication demoApplication;
+
 	private final BeforeActionInterceptor beforeActionInterceptor;
 
 	@Autowired
@@ -33,19 +36,28 @@ public class UsrArticleController {
 	@Autowired
 	private BoardService boardService;
 
-	UsrArticleController(BeforeActionInterceptor beforeActionInterceptor) {
+	UsrArticleController(BeforeActionInterceptor beforeActionInterceptor, DemoApplication demoApplication) {
 		this.beforeActionInterceptor = beforeActionInterceptor;
+		this.demoApplication = demoApplication;
 	}
 
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
-		
-		articleService.increaseHitCount(id);
+
+		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
+
+//		System.out.println(increaseHitCountRd.toString());
+
+//		System.out.println(increaseHitCountRd.isFail());
+
+		if (increaseHitCountRd.isFail()) {
+			return rq.historyBackOnView(increaseHitCountRd.getMsg());
+		}
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-		
+
 		model.addAttribute("article", article);
 
 		return "usr/article/detail";
