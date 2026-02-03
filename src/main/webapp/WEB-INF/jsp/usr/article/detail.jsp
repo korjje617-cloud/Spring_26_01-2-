@@ -16,13 +16,19 @@
 
 			<!-- 메타 정보 -->
 			<div style="color: #666; font-size: 14px; margin-bottom: 20px;">
-				<span>작성자: ${article.extra__writer}</span>
+
+				<span>작성자: ${article.extra__writer }</span>
+
 				&nbsp;|&nbsp;
-				<span>작성일: ${article.regDate}</span>
-				<c:if test="${article.updateDate ne article.regDate}">
-            &nbsp;|&nbsp;
-            <span>수정일: ${article.updateDate}</span>
-				</c:if>
+
+				<span>작성일: ${article.regDate }</span>
+
+				&nbsp;|&nbsp;
+
+				<span>조회수: ${article.hitCount }</span>
+
+				<div style="text-align: right; font-size: 12px; color: #999;">게시글 번호: ${article.id}</div>
+
 			</div>
 
 			<hr>
@@ -33,7 +39,6 @@
 			<hr>
 
 			<!-- 하단 정보 -->
-			<div style="text-align: right; font-size: 12px; color: #999;">게시글 번호: ${article.id}</div>
 
 			<div class="btns">
 				<button class="btn btn-outline btn-ghost" type="button" type="button" onClick="history.back();">뒤로가기</button>

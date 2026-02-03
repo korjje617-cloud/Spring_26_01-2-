@@ -48,6 +48,7 @@
 					<th style="text-align: center;">Registration date</th>
 					<th style="text-align: center;">Title</th>
 					<th style="text-align: center;">Writer</th>
+					<th style="text-align: center;">Hit</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,6 +60,7 @@
 							<a href="detail?id=${article.id } ">${article.title }</a>
 						</td>
 						<td style="text-align: center;">${article.extra__writer }</td>
+						<td style="text-align: center;">${article.hitCount }</td>
 					</tr>
 				</c:forEach>
 
