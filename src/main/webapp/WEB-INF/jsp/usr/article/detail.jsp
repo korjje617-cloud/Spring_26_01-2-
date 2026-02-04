@@ -64,6 +64,13 @@
 
 			<hr>
 
+			<!-- 좋아요, 싫어요 가운데 정렬까지만 -->
+			<div class="text-center" >
+				<button class="btn btn-outline btn-secondary">like ${article.likeCount }</button>
+				<button class="btn btn-outline btn-primary">dislike ${article.dislikeCount }</button>
+			</div>
+
+
 			<!-- 하단 정보 -->
 
 			<div class="btns mt-20">

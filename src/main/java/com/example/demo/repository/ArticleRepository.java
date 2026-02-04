@@ -32,5 +32,10 @@ public interface ArticleRepository {
 	public int increaseHitCount(int id);
 
 	public Object getArticleHitCount(int id);
+	
+	// xml로 인자  이동
+	public int likeCounting(int id);
+	
+	public int dislikeCounting(int id);
 
 }

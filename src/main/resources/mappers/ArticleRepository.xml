@@ -138,15 +138,31 @@
 
 	<update id="increaseHitCount" parameterType="int">
 		UPDATE article
-		SET hitCount = hitCount + 1
+		SET
+		hitCount = hitCount + 1
 		WHERE id = #{id}
 	</update>
-	
+
 	<select id="getArticleHitCount" parameterType="int">
 		SELECT hitCount
 		FROM article
 		WHERE id = #{id}
 	</select>
 	
-	
+	<!-- 저장된 숫자 가져오기 -->
+	<select id="likeCounting" parameterType="int">
+		SELECT likeCount
+		FROM
+		article
+		WHERE id = #{id}
+	</select>
+
+	<select id="dislikeCounting" parameterType="int">
+		SELECT dislikeCount
+		FROM
+		article
+		WHERE id = #{id}
+	</select>
+
+
 </mapper>

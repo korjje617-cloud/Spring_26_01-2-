@@ -8,6 +8,9 @@ CREATE TABLE article (
 	 regDate DATETIME NOT NULL,
 	 updateDate DATETIME NOT NULL,
 	 memberId INT(10) UNSIGNED NOT NULL,
+	 hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
+	 likeCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
+	 dislikeCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
 	 boardId INT(10) NOT NULL,
 	 title CHAR(100) NOT NULL,
 	 `body` TEXT NOT NULL
@@ -133,6 +136,14 @@ FROM board;
 
 
 ##===============================###################### 테스트
+
+UPDATE article
+SET viewCount = viewCount + 1
+WHERE id = 1;
+
+SELECT * FROM article
+WHERE id = 1;
+		
 
 # 자유게시판 생성
 INSERT INTO article

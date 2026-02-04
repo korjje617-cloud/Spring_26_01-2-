@@ -121,6 +121,16 @@ public class ArticleService {
 	public Object getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
 	}
+
+	// 인자 이동
+	public int likeCounting(int id) {
+		return articleRepository.likeCounting(id);
+		
+	}
+
+	public int dislikeCounting(int id) {
+		return articleRepository.dislikeCounting(id);	
+	}
 	
 	
 
