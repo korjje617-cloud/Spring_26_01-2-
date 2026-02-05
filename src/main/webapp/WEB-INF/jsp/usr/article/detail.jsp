@@ -73,8 +73,8 @@
 
 			<!-- 하단 정보 -->
 
-			<div class="btns mt-20">
-				<button class="btn btn-outline btn-ghost" type="button" type="button" onClick="history.back();">뒤로가기</button>
+			<div class="btns mt-10">
+				<button class="btn btn-outline btn-ghost" type="button" onClick="history.back();">뒤로가기</button>
 				<c:if test="${article.userCanModify }">
 					<a class="btn btn-outline btn-warning" type="button" href="../article/modify?id=${article.id }">수정</a>
 				</c:if>
