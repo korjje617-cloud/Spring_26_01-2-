@@ -22,3 +22,4 @@ jsp 에서 article.viewCount 로 값을 보기
 디테일 페이지 한번 보고 나오면 viewCount 가 2로 리셋
 
 저장을 잘못하고 있는 것 같은데
+

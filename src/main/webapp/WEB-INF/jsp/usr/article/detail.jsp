@@ -64,11 +64,21 @@
 
 			<hr>
 
-			<!-- 좋아요, 싫어요 가운데 정렬까지만 -->
-			<div class="text-center" >
-				<button class="btn btn-outline btn-secondary">like ${article.likeCount }</button>
-				<button class="btn btn-outline btn-primary">dislike ${article.dislikeCount }</button>
-			</div>
+			<!-- 좋아요 싫어요 합계 -->
+			<tbody>
+				<tr>
+					<th style="text-align: center;">LIKE</th>
+					<td style="text-align: center;">${article.extra__goodReactionPoint }</td>
+				</tr>
+				<tr>
+					<th style="text-align: center;">DISLIKE</th>
+					<td style="text-align: center;">${article.extra__badReactionPoint }</td>
+				</tr>
+				<tr>
+					<th style="text-align: center;">SUM</th>
+					<td style="text-align: center;">${article.extra__sumReactionPoint }</td>
+				</tr>
+			</tbody>
 
 
 			<!-- 하단 정보 -->

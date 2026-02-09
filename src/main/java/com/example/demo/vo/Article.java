@@ -19,11 +19,13 @@ public class Article {
 	private String title;
 	private String body;
 	private int hitCount;
-	// 좋아요 싫어요 추가
-	private int likeCount;
-	private int dislikeCount;
 
 	private String extra__writer;
+
+	private String extra__goodReactionPoint;
+	private String extra__badReactionPoint;
+	private String extra__sumReactionPoint;
+
 	private boolean userCanModify;
 	private boolean userCanDelete;
 }

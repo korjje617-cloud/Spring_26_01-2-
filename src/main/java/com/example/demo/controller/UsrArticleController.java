@@ -45,10 +45,6 @@ public class UsrArticleController {
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
-		
-		// 좋아요 싫어요 갯수만 일단
-		articleService.likeCounting(id);
-		articleService.dislikeCounting(id);
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
