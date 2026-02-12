@@ -64,20 +64,17 @@
 
 			<hr>
 
-			<!-- 좋아요 싫어요 합계 -->
+			<!-- 좋아요 싫어요 -->
 			<tbody>
 				<tr>
-					<th style="text-align: center;">LIKE</th>
-					<td style="text-align: center;">${article.extra__goodReactionPoint }</td>
-				</tr>
+					<th style="text-align: center;">LIKE / DISLIKE ${usersReaction }</th>
+					<td style="text-align: center;">
+						<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+							class="btn btn-outline btn-success">👍 LIKE ${article.goodReactionPoint } </a>
+						<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+							class="btn btn-outline btn-error">👎 DISLIKE ${article.badReactionPoint}</a>
+					</td>
 				<tr>
-					<th style="text-align: center;">DISLIKE</th>
-					<td style="text-align: center;">${article.extra__badReactionPoint }</td>
-				</tr>
-				<tr>
-					<th style="text-align: center;">SUM</th>
-					<td style="text-align: center;">${article.extra__sumReactionPoint }</td>
-				</tr>
 			</tbody>
 
 

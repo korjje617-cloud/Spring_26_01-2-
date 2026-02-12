@@ -109,8 +109,6 @@ public class ArticleService {
 
 		int affectedRow = articleRepository.increaseHitCount(id);
 
-//		System.err.println("affectedRow : " + affectedRow);
-
 		if (affectedRow == 0) {
 			return ResultData.from("F-1", "해당 게시글은 없음", "id", id);
 		}
@@ -122,16 +120,43 @@ public class ArticleService {
 		return articleRepository.getArticleHitCount(id);
 	}
 
-	// 인자 이동
-	public int likeCounting(int id) {
-		return articleRepository.likeCounting(id);
-		
+	public ResultData increaseGoodReactionPoint(int relId) {
+		int affectedRow = articleRepository.increaseGoodReactionPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "없는 게시물");
+		}
+
+		return ResultData.from("S-1", "좋아요 증가", "affectedRow", affectedRow);
 	}
 
-	public int dislikeCounting(int id) {
-		return articleRepository.dislikeCounting(id);	
-	}
-	
-	
+	public ResultData increaseBadReactionPoint(int relId) {
+		int affectedRow = articleRepository.increaseBadReactionPoint(relId);
 
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "없는 게시물");
+		}
+
+		return ResultData.from("S-1", "싫어요 증가", "affectedRow", affectedRow);
+	}
+
+	public ResultData decreaseGoodReactionPoint(int relId) {
+		int affectedRow = articleRepository.decreaseGoodReactionPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "없는 게시물");
+		}
+
+		return ResultData.from("S-1", "좋아요 감소", "affectedRow", affectedRow);
+	}
+
+	public ResultData decreaseBadReactionPoint(int relId) {
+		int affectedRow = articleRepository.decreaseBadReactionPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "없는 게시물");
+		}
+
+		return ResultData.from("S-1", "싫어요 감소", "affectedRow", affectedRow);
+	}
 }

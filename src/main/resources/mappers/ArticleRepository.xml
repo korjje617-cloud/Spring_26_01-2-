@@ -70,17 +70,56 @@
 		WHERE id = #{id}
 	</update>
 
+	<update id="increaseHitCount" parameterType="int">
+		UPDATE article
+		SET
+		hitCount = hitCount + 1
+		WHERE id = #{id}
+	</update>
+
+	<update id="increaseGoodReactionPoint" parameterType="int">
+		UPDATE
+		article
+		SET
+		goodReactionPoint = goodReactionPoint + 1
+		WHERE id = #{relId}
+	</update>
+
+	<update id="decreaseGoodReactionPoint" parameterType="int">
+		UPDATE
+		article
+		SET goodReactionPoint = goodReactionPoint - 1
+		WHERE id =
+		#{relId}
+	</update>
+
+	<update id="increaseBadReactionPoint" parameterType="int">
+		UPDATE
+		article
+		SET badReactionPoint = badReactionPoint + 1
+		WHERE id = #{relId}
+	</update>
+
+	<update id="decreaseBadReactionPoint" parameterType="int">
+		UPDATE
+		article
+		SET badReactionPoint = badReactionPoint - 1
+		WHERE id = #{relId}
+	</update>
+
+	<select id="getArticleHitCount" parameterType="int">
+		SELECT hitCount
+		FROM article
+		WHERE id = #{id}
+	</select>
+
+
 	<select id="getForPrintArticle" parameterType="int"
 		resultType="com.example.demo.vo.Article">
-		SELECT A.*, M.nickname AS extra__writer,
-		IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
-		IFNULL(SUM(IF(RP.point &gt; 0, RP.point ,0)),0) AS extra__goodReactionPoint,
-		IFNULL(SUM(IF(RP.point &lt; 0, RP.point ,0)),0) AS extra__badReactionPoint
+		SELECT A.*, M.nickname AS extra__writer
 		FROM article AS A
 		INNER JOIN `member` AS M
 		ON A.memberId = M.id
-		LEFT JOIN reactionPoint AS RP
-		ON A.id = RP.relId AND RP.relTypeCode = 'article'
 		WHERE A.id =
 		#{id}
 	</select>
@@ -95,15 +134,11 @@
 
 	<select id="getForPrintArticles"
 		resultType="com.example.demo.vo.Article">
-		SELECT A.*, M.nickname AS extra__writer,
-		IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
-		IFNULL(SUM(IF(RP.point &gt; 0, RP.point ,0)),0) AS extra__goodReactionPoint,
-		IFNULL(SUM(IF(RP.point &lt; 0, RP.point ,0)),0) AS extra__badReactionPoint
+		SELECT A.*, M.nickname AS extra__writer
 		FROM article AS A
-		INNER JOIN `member` AS M
+		INNER JOIN
+		`member` AS M
 		ON A.memberId = M.id
-		LEFT JOIN reactionPoint AS RP
-		ON A.id = RP.relId AND RP.relTypeCode = 'article'
 		WHERE 1
 		<if test="boardId != 0">
 			AND A.boardId = #{boardId}
@@ -128,7 +163,6 @@
 				</otherwise>
 			</choose>
 		</if>
-		GROUP BY A.id
 		ORDER BY A.id
 		DESC
 		<if test="limitFrom >= 0">
@@ -144,19 +178,6 @@
 		ON A.memberId = M.id
 		ORDER BY A.id
 		DESC
-	</select>
-
-	<update id="increaseHitCount" parameterType="int">
-		UPDATE article
-		SET
-		hitCount = hitCount + 1
-		WHERE id = #{id}
-	</update>
-
-	<select id="getArticleHitCount" parameterType="int">
-		SELECT hitCount
-		FROM article
-		WHERE id = #{id}
 	</select>
 
 </mapper>

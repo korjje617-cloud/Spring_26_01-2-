@@ -8,10 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.example.demo.DemoApplication;
 import com.example.demo.interceptor.BeforeActionInterceptor;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.ReactionPointService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
@@ -26,6 +28,12 @@ public class UsrArticleController {
 	private final DemoApplication demoApplication;
 
 	private final BeforeActionInterceptor beforeActionInterceptor;
+
+	@Autowired
+	private ReactionPointService reactionPointService;
+	
+	@Autowired
+	private UsrReactionPointController usrReactionPointController;
 
 	@Autowired
 	private Rq rq;
@@ -48,7 +56,17 @@ public class UsrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
+		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
+
+		if (usersReactionRd.isSuccess()) {
+			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
+		}
+
 		model.addAttribute("article", article);
+		model.addAttribute("isAlreadyAddGoodRp",
+				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
+		model.addAttribute("isAlreadyAddBadRp",
+				reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
 
 		return "usr/article/detail";
 	}
