@@ -22,11 +22,24 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Board {
 
-	private int id;
-	private String regDate;
-	private String updateDate;
-	private String code;
-	private String name;
-	private boolean delStatus;
-	private LocalDateTime delDate;
+    // 게시판의 고유 번호 (예: 1번 게시판, 2번 게시판)
+    private int id;
+
+    // 게시판이 생성된 날짜와 시간
+    private String regDate;
+
+    // 게시판 설정이 마지막으로 수정된 날짜와 시간
+    private String updateDate;
+
+    // 게시판을 식별하는 코드 (예: notice, free 등 영문 이름)
+    private String code;
+
+    // 게시판의 실제 이름 (예: 공지사항, 자유게시판 등 한글 이름)
+    private String name;
+
+    // 게시판의 삭제 여부를 저장 (true면 삭제됨, false면 사용 중)
+    private boolean delStatus;
+
+    // 게시판이 삭제된 정확한 날짜와 시간
+    private LocalDateTime delDate;
 }

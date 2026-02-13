@@ -3,7 +3,7 @@ package com.example.demo.vo;
 import lombok.Getter;
 import lombok.ToString;
 
-// 자바 어노테이션 : 객체 내부의 데이터를 문자열로 쉽게 출력할 수 있게 함
+// 객체 내부의 데이터를 문자열로 쉽게 출력할 수 있게 함
 @ToString
 
 // <DT>: 데이터 타입을 나중에 정할 수 있게 비워둔 주머니 (제네릭)

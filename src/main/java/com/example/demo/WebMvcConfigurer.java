@@ -9,11 +9,11 @@ import com.example.demo.interceptor.BeforeActionInterceptor;
 import com.example.demo.interceptor.NeedLoginInterceptor;
 import com.example.demo.interceptor.NeedLogoutInterceptor;
 
-// 스프링 어노테이션 : 스프링 설정 클래스 및 수동 빈 등록
+// 스프링 설정 클래스 및 수동 빈 등록
 @Configuration
 public class WebMvcConfigurer implements org.springframework.web.servlet.config.annotation.WebMvcConfigurer {
 	
-	// 스프링 어노테이션 : 스프링 빈 자동 주입, 의존성 주입
+	// 스프링 빈 자동 주입, 의존성 주입
 	// 미리 만들어둔 인터셉터 객체들을 자동으로 가져와서 연결
 	@Autowired
 	BeforeActionInterceptor beforeActionInterceptor;
@@ -24,7 +24,7 @@ public class WebMvcConfigurer implements org.springframework.web.servlet.config.
 	@Autowired
 	NeedLogoutInterceptor needLogoutInterceptor;
 
-	// 자바 어노테이션 : 부모 클래스의 메서드를 자식 클래스에서 재정의한다
+	// 부모 클래스의 메서드를 자식 클래스에서 재정의한다
 	// addInterceptors: 어떤 인터셉터를 어떤 주소(URL)에 적용할지 등록하는 메서드
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {

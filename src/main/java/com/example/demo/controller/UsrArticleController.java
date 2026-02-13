@@ -22,9 +22,9 @@ import com.example.demo.vo.Rq;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-// 롬복 어노테이션 : 컨트롤러 클래스임을 알려줌
+
 @Controller
-// 게시글 컨트롤러 클래스
+
 public class UsrArticleController {
 	/// 필드
 

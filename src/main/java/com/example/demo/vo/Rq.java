@@ -11,13 +11,13 @@ import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import lombok.Setter;
 
-//스프링 어노테이션 : 스프링에서 관리하는 객체==빈
+//스프링에서 관리하는 객체==빈
 @Component
 
-// 스프링 어노테이션 : 이 객체는 'request(요청)'마다 하나씩 새로 만들어지고 끝나면 사라짐
+// 이 객체는 'request(요청)'마다 하나씩 새로 만들어지고 끝나면 사라짐
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 
-// 자바 @Getter, @Setter: 클래스 내부 변수들을 읽고 쓸 수 있는 메서드를 자동으로 만들어줌
+// 클래스 내부 변수들을 읽고 쓸 수 있는 메서드를 자동으로 만들어줌
 @Getter
 @Setter
 public class Rq {

@@ -22,15 +22,36 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Member {
 
-	private int id;
-	private LocalDateTime regDate;
-	private LocalDateTime updateDate;
-	private String loginId;
-	private String loginPw;
-	private String name;
-	private String nickname;
-	private String cellphoneNum;
-	private String email;
-	private boolean delStatus;
-	private LocalDateTime delDate;
+    // 회원의 고유 식별 번호 (데이터베이스 PK)
+    private int id;
+
+    // 계정이 생성된(가입한) 날짜와 시간
+    private LocalDateTime regDate;
+
+    // 회원 정보가 마지막으로 수정된 날짜와 시간
+    private LocalDateTime updateDate;
+
+    // 로그인할 때 사용하는 사용자 아이디
+    private String loginId;
+
+    // 로그인 비밀번호 (보통 암호화되어 저장됨)
+    private String loginPw;
+
+    // 회원의 본명 (실명)
+    private String name;
+
+    // 서비스 내에서 사용하는 별명
+    private String nickname;
+
+    // 회원의 전화번호
+    private String cellphoneNum;
+
+    // 회원의 이메일 주소
+    private String email;
+
+    // 탈퇴 여부 상태 (true: 탈퇴함, false: 활동 중)
+    private boolean delStatus;
+
+    // 회원이 탈퇴한 실제 날짜와 시간
+    private LocalDateTime delDate;
 }

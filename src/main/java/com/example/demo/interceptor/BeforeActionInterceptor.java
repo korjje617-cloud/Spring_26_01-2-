@@ -9,20 +9,20 @@ import com.example.demo.vo.Rq;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-// 스프링 어노테이션 : 스프링에서 관리하는 객체==빈
+// 스프링에서 관리하는 객체==빈
 @Component
 
 // 이 클래스는 HandlerInterceptor 인터페이스를 상속받았다
 // 모든 요청이 컨트롤러로 가기 전에 잠깐 정지하고 공통 준비를 한다
 public class BeforeActionInterceptor implements HandlerInterceptor {
 	
-	// 스프링 어노테이션 : 스프링 빈 자동 주입, 의존성 주입
+	// 스프링 빈 자동 주입, 의존성 주입
 	@Autowired
 	
 	// Rq 클래스로 만든 rq 객체를 주입받아서 가져왔다
 	private Rq rq;
 	
-	// 자바 어노테이션 : 부모 클래스의 메서드를 자식 클래스에서 재정의한다
+	// 부모 클래스의 메서드를 자식 클래스에서 재정의한다
 	@Override
 	
 	// req: 요청 정보, resp: 응답 정보, Handler: 실행될 컨트롤러 정보

@@ -20,21 +20,45 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Article {
 
-	private int id;
-	private String regDate;
-	private String updateDate;
-	private int memberId;
-	private int boardId;
-	private String title;
-	private String body;
-	private int hitCount;
-	private int goodReactionPoint;
-	private int badReactionPoint;
+    // 게시글의 고유 번호 (데이터베이스의 PK)
+    private int id;
 
-	private String extra__writer;
+    // 게시글이 처음 작성된 시간
+    private String regDate;
 
-	private String extra__sumReactionPoint;
+    // 게시글이 마지막으로 수정된 시간
+    private String updateDate;
 
-	private boolean userCanModify;
-	private boolean userCanDelete;
+    // 이 글을 쓴 작성자의 번호 (Member 테이블의 id와 연결)
+    private int memberId;
+
+    // 이 글이 속한 게시판의 번호 (공지사항, 자유게시판 등)
+    private int boardId;
+
+    // 게시글의 제목
+    private String title;
+
+    // 게시글의 본문 내용
+    private String body;
+
+    // 글의 조회수
+    private int hitCount;
+
+    // 추천(좋아요) 수
+    private int goodReactionPoint;
+
+    // 비추천(싫어요) 수
+    private int badReactionPoint;
+
+    // [부가정보] 작성자의 이름 (DB JOIN을 통해 가져옴)
+    private String extra__writer;
+
+    // [부가정보] 좋아요와 싫어요를 계산한 합산 점수
+    private String extra__sumReactionPoint;
+
+    // 현재 사용자가 이 글을 수정할 수 있는지 여부
+    private boolean userCanModify;
+
+    // 현재 사용자가 이 글을 삭제할 수 있는지 여부
+    private boolean userCanDelete;
 }
