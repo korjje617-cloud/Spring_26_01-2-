@@ -113,6 +113,17 @@
 		WHERE id = #{id}
 	</select>
 
+	<select id="getGoodRP">SELECT goodReactionPoint
+		FROM article
+		WHERE id =
+		#{relId}
+	</select>
+	<select id="getBadRP">SELECT badReactionPoint
+		FROM article
+		WHERE id =
+		#{relId}
+	</select>
+
 
 	<select id="getForPrintArticle" parameterType="int"
 		resultType="com.example.demo.vo.Article">

@@ -17,13 +17,21 @@ public class ResultData<DT> {
 	@Getter
 	private String msg;
 	
-	// 외부에서 실제 데이터를 읽을 수 있게 함 (주머니 속 내용물)
+	// 외부에서 실제 데이터1 을 읽을 수 있게 함 (주머니 속 내용물)
 	@Getter
 	private DT data1;
 	
-	// 외부에서 데이터의 이름을 읽을 수 있게 함
+	// 외부에서 데이터1 의 이름을 읽을 수 있게 함
 	@Getter
 	private String data1Name;
+	
+	// 외부에서 실제 데이터2 를 읽을 수 있게 함 (주머니 속 내용물)
+	@Getter
+	private Object data2;
+	
+	// 외부에서 데이터2 의 이름을 읽을 수 있게 함
+	@Getter
+	private String data2Name;
 
 
 	
@@ -48,17 +56,32 @@ public class ResultData<DT> {
 		// 메시지 저장
 		rd.msg = msg;
 		
-		// 실제 데이터 저장
+		// 실제 데이터1 저장
 		rd.data1 = data1;
 		
-		// 데이터 이름 저장
+		// 데이터1 이름 저장
 		rd.data1Name = data1Name;
 
 		// 완성된 보고서 반환
 		return rd;
 	}
-
 	
+	// 코드, 메시지, 이름, 실제 데이터1 + 데이터 2까지 모두 담는 도구C
+	public static <DT> ResultData<DT> from(String resultCode, String msg, String data1Name, DT data1, String data2Name, DT data2) {
+		
+		// 도구B 와 같은 구조에 데이터 2만 추가됐다
+		ResultData<DT> rd = new ResultData<DT>();
+		rd.ResultCode = resultCode;
+		rd.msg = msg;
+		rd.data1Name = data1Name;
+		rd.data1 = data1;
+		rd.data2Name = data2Name;
+		rd.data2 = data2;
+
+		return rd;
+	}
+	
+		
 	// 결과 코드가 "S-"로 시작하면 성공으로 판단하는 기능
 	public boolean isSuccess() {
 		return ResultCode.startsWith("S-");
