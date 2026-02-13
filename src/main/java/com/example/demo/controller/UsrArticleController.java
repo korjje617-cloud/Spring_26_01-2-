@@ -22,8 +22,11 @@ import com.example.demo.vo.Rq;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+// 롬복 어노테이션 : 컨트롤러 클래스임을 알려줌
 @Controller
+// 게시글 컨트롤러 클래스
 public class UsrArticleController {
+	/// 필드
 
 	private final DemoApplication demoApplication;
 
@@ -55,7 +58,8 @@ public class UsrArticleController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-
+		
+		// 여기서 relTypeCode 데이터를 받아감
 		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
 
 		if (usersReactionRd.isSuccess()) {
@@ -167,7 +171,7 @@ public class UsrArticleController {
 
 		// 한 페이지에 글 10개씩
 		// 글 20 -> 2page
-//		글 25 -> 3page
+		//글 25 -> 3page
 		int itemsInAPage = 10;
 
 		int pagesCount = (int) Math.ceil(articlesCount / (double) itemsInAPage);

@@ -1,0 +1,25 @@
+http://localhost:8080/usr/home/main
+
+조회수
+int viewCount
+list 에서 제목 클릭 시 추가?
+detail 페이지 조회 시 추가?
+아무래도 detail 쪽이 더 맞는 방향같다
+
+내 의도
+detail 페이지 요청이 들어오면
+viewCount 에 숫자를 1 증가 시킨다
+
+viewCounting 이라는 메서드에 글id 값을 넣어서 최종적으로 리포지터리까지 요청 전달
+리포지터리 xml은 글 아이디가 id 값인 게시글의 viewCount 라는 컬럼의 값에 +1 더하는 쿼리 실행
+그걸 article 객체에 set 시킨 다음 model 객체에 넣는다
+jsp 에서 article.viewCount 로 값을 보기
+
+문제
+쿼리 실행은 오류가 없음
+그런데 리스트 조회수는 2
+디테일 조회수는 1
+디테일 페이지 한번 보고 나오면 viewCount 가 2로 리셋
+
+저장을 잘못하고 있는 것 같은데
+
