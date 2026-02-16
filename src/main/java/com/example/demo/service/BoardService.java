@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.repository.BoardRepository;
 import com.example.demo.vo.Board;
 
-//이 클래스가 핵심 비즈니스 로직을 담당하는 '서비스' 객체임을 스프링에 알림
+//이 클래스가 '비즈니스 로직'을 담당하는 서비스 객체임을 스프링에 알림
+//스프링이 시작될 때 이 어노테이션을 보고 객체를 스스로 만들어 관리함
 @Service
 public class BoardService {
 

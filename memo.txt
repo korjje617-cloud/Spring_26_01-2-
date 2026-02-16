@@ -1,11 +1,6 @@
 http://localhost:8080/usr/home/main
 
-주석 필요한 파일
-ReactionPointRepository
-ArticleRepository
+매퍼
+게시글
 
-ReactionPointService
-ArticleService
 
-UsrReactionPointController
-UsrArticleController
